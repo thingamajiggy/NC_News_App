@@ -16,15 +16,13 @@ export const TopicsPage = () => {
         .then((res) => {
             return setTopic(res.data.result)
         })
-    }, [slug, articlesApi])
+    }, [slug])
 
     return (
         <ul>
-            {topic.map(({article_id, title, author, body}) => {
+            {topic.map(({article_id, title, author}) => {
                 return <li key={article_id} className="App-list">
-                    <h3>{title}</h3>
-                    <p>by {author}</p>
-                    <p>{body}</p>
+                    <Link to ={`/articles/${article_id}`}>{title} by {author}</Link>
                 </li>
             })}
         </ul>
