@@ -11,6 +11,7 @@ const articlesApi = axios.create({
 export const ArticlesPage = () => {
     const [article, setArticle] = useState([]);
     const [comments, setComments] = useState([]);
+    const [isVoting, setIsVoting] = useState(false);
     const params = useParams();
 
     useEffect(() => {
@@ -21,6 +22,8 @@ export const ArticlesPage = () => {
     }, [params.article_id])
     
     const voteOnArticle = (article_id, change) => {
+        setIsVoting(true)
+
         const reqBody = {
             inc_votes: change,
         };
@@ -48,13 +51,12 @@ export const ArticlesPage = () => {
         {article.votes}
         <button type="button" onClick={() => {
             voteOnArticle(params.article_id, 1);
-        }}>
-        
+        }} disabled={isVoting}>
         <span aria-label="increase votes for this article">👍</span>
         </button>
         <button type="button" onClick={() => {
             voteOnArticle(params.article_id, -1);
-        }}>
+        }} disabled={isVoting}>
         <span aria-label="decrease votes for this article">👎</span>
         </button>
 
