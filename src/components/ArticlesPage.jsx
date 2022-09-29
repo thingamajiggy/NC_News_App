@@ -10,6 +10,7 @@ const articlesApi = axios.create({
 
 export const ArticlesPage = () => {
     const [article, setArticle] = useState([]);
+    const [comments, setComments] = useState([]);
     const params = useParams();
 
     useEffect(() => {
@@ -19,21 +20,21 @@ export const ArticlesPage = () => {
         })
     }, [params.article_id])
     
-const voteOnArticle = (article_id) => {
+const voteOnArticle = (article_id, change) => {
     const reqBody = {
-        inc_votes: 1,
+        inc_votes: change,
     };
+
+    setArticle({
+        ...article,
+        votes: article.votes + change
+    })
+
         articlesApi
         .patch(`/articles/${article_id}`, reqBody)
-        .then(({ data }) => {
-            console.log(data, ">>>>>")
-            // setArticle((currentArticle) => {
-            //     return currentArticle.map(current => {
-            //         if(current.article_id === article_id) {
-            //             return {...current, votes: current.votes + 1 }
-            //         } 
-            //     })
-            // })
+        .catch((err) => {
+            console.error(err)
+            alert('error updating article votes')
         })
     }
 
@@ -44,20 +45,31 @@ const voteOnArticle = (article_id) => {
         <p>by {article.author}</p>
         <p>{article.body}</p>
 
-        <button type="button" onClick={() => {
-            voteOnArticle(params.article_id);
-        }}>
         {article.votes}
-        <span aria-label="votes for this comment">👍</span>
+        <button type="button" onClick={() => {
+            voteOnArticle(params.article_id, 1);
+        }}>
+        
+        <span aria-label="increase votes for this article">👍</span>
+        </button>
+        <button type="button" onClick={() => {
+            voteOnArticle(params.article_id, -1);
+        }}>
+        <span aria-label="decrease votes for this article">👎</span>
         </button>
 
         <section>
             <p>comments</p>
-        <CommentsList />
+        <CommentsList comments={comments} setComments={setComments} />
         </section>
 
         <section>
-        <CommentsAdder />
+        <CommentsAdder addComment={(newComment) => {
+                setComments([
+                    ...comments,
+                    newComment,
+                ])
+        }} />
         </section>
         
         <Link to={`/articles/${Number(params.article_id) + 1}`}>Next News</Link>

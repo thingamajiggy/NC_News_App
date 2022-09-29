@@ -7,8 +7,8 @@ const articlesApi = axios.create({
     baseURL: "https://myfirstbackendproject.herokuapp.com/api"
 })
 
-export const CommentsList = () => {
-    const [comments, setComments] = useState([]);
+export const CommentsList = ({setComments, comments}) => {
+    
     const params = useParams();
 
     useEffect(() => {
@@ -23,13 +23,23 @@ export const CommentsList = () => {
         newComments.splice(commentItem, 1);
         setComments(newComments);
     }
+
+
  
     return (
         <section>
         <ul>
             {comments.map((comment, commentItem) => {
+                console.log(comments, ">>>>>>")
                 return <li key={comment.comment_id}>
+                    <p>{comment.author}</p>
                     <p>{comment.body}</p>
+
+                    <button type="button">
+                    {comment.votes}
+                    <span aria-label="votes for this comment">👍</span>
+                    </button>
+
                     <button onClick={() => handleDeleteComment(commentItem)}>delete</button>
                 </li>
             })}

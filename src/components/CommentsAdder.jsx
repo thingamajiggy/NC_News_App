@@ -10,7 +10,8 @@ const authors = [
     "tickle122", "grumpy19", "happyamy2016", "cooljmessy", "weegembump", "jessjelly"
 ]
 
-export const CommentsAdder = ({setComments}) => {
+export const CommentsAdder = ({addComment}) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [commentInput, setCommentInput] = useState('');
     const [addUsername, setAddUsername] = useState(authors[0])
     const params = useParams();
@@ -18,19 +19,21 @@ export const CommentsAdder = ({setComments}) => {
    const handleSubmit = (e) => {
     e.preventDefault()
 
+    setIsSubmitting(true)
+
     articlesApi.post(`/articles/${params.article_id}/comments`, {
         body: commentInput,
         username: addUsername
     })
     .then(({ data }) => {
-        setComments((currentComments) => {
-            console.log(currentComments, ">>figure out")
-            return [data.newComments, ...currentComments];
-        })
+        addComment(data.newComments)
         setCommentInput('');
+        alert('Successfully posted comment');
     })
     .catch((err) => {
         console.log(err);
+    }).then(() => {
+        setIsSubmitting(false)
     })
    }
 
@@ -49,11 +52,11 @@ export const CommentsAdder = ({setComments}) => {
             onChange={(e) => setCommentInput(e.target.value)}>
             </textarea>
 
-        <select onChange={(e) => {handleAddUsernameChange(e)}}>
+        <select class="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
             {authors.map((username) => <option value={username} key={username}>{username}</option>)}
         </select>
 
-            <button>Add</button>
+            <button disabled={isSubmitting || !commentInput || !addUsername}>Add</button>
 
         </form>
         </section>
