@@ -17,17 +17,21 @@ export const AuthorsPage = () => {
         .then((res) => {
             setAuthor(res.data.result)
         })
-    }, [username, articlesApi])
+    }, [username])
    
     return (
-        <ul>
-           {author.map(({author, title, body}) => {
-            return <li key={author} className="App-list">
-                <Link>{title}</Link>
-                <p>{body}</p>
-            </li>
-           })}
-        </ul>
+        <>
+            <h2>
+                Welcome to the author {username}'s page
+            </h2>
+            <ul>
+            {author.map(({title, article_id}) => {
+                return <li key={article_id} className="App-list">
+                    <Link to={`/articles/${article_id}`}>{title}</Link>
+                </li>
+            })}
+            </ul>
+        </>
     )
 }
 
