@@ -11,8 +11,6 @@ export const CommentsList = ({setComments, comments}) => {
     
     const params = useParams();
 
-    console.log(params, ">>>>>>look at this")
-
     useEffect(() => {
         articlesApi.get(`/articles/${params.article_id}/comments`)
         .then((res) => {
