@@ -8,6 +8,8 @@ const articlesApi = axios.create({
 })
 
 export const CommentsList = ({setComments, comments}) => {
+
+    console.log(comments, ">>what is this")
     
     const params = useParams();
 
@@ -19,18 +21,16 @@ export const CommentsList = ({setComments, comments}) => {
     }, [params.article_id])
     
     const handleDeleteComment = (commentItem) => {
+        // articlesApi.delete(`/comments/${params.comment_id}`)
         const newComments = [...comments];
         newComments.splice(commentItem, 1);
         setComments(newComments);
     }
-
-
  
     return (
         <section>
         <ul>
             {comments.map((comment, commentItem) => {
-                console.log(comments, ">>>>>>")
                 return <li key={comment.comment_id}>
                     <p>{comment.author}</p>
                     <p>{comment.body}</p>

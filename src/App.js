@@ -26,8 +26,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<ArticlesList articlesLists={articlesLists} setArticlesLists={setArticlesLists} />} />
           <Route path="/articles/:article_id" element={<ArticlesPage />} />
-          <Route path="/articles/:article_id/comments" element={<CommentsList />} />
-          <Route path="/articles/:article_id/comments" element={<CommentsAdder />} />
           <Route path="/users" element={<AuthorsList />} />
           <Route path="/users/:username" element={<AuthorsPage />} />
           <Route path="/topics" element={<TopicsList />} />
