@@ -49,7 +49,6 @@ export const ArticlesPage = () => {
         <button type="button" onClick={() => {
             voteOnArticle(params.article_id, 1);
         }}>
-        
         <span aria-label="increase votes for this article">👍</span>
         </button>
         <button type="button" onClick={() => {

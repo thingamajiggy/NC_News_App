@@ -43,7 +43,6 @@ export const CommentsAdder = ({addComment}) => {
 
     return(
         <section>
-
         <form onSubmit={(e) => {handleSubmit(e)}}>
             <label htmlFor="commentInput">Add a comment</label>
             <textarea 

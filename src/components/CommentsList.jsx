@@ -11,6 +11,8 @@ export const CommentsList = ({setComments, comments}) => {
     
     const params = useParams();
 
+    console.log(params, ">>>>>>look at this")
+
     useEffect(() => {
         articlesApi.get(`/articles/${params.article_id}/comments`)
         .then((res) => {
@@ -24,13 +26,10 @@ export const CommentsList = ({setComments, comments}) => {
         setComments(newComments);
     }
 
-
- 
     return (
         <section>
         <ul>
             {comments.map((comment, commentItem) => {
-                console.log(comments, ">>>>>>")
                 return <li key={comment.comment_id}>
                     <p>{comment.author}</p>
                     <p>{comment.body}</p>
