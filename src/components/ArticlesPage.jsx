@@ -20,23 +20,23 @@ export const ArticlesPage = () => {
         })
     }, [params.article_id])
     
-const voteOnArticle = (article_id, change) => {
-    const reqBody = {
-        inc_votes: change,
-    };
-
-    setArticle({
-        ...article,
-        votes: article.votes + change
-    })
-
-        articlesApi
-        .patch(`/articles/${article_id}`, reqBody)
-        .catch((err) => {
-            console.error(err)
-            alert('error updating article votes')
+    const voteOnArticle = (article_id, change) => {
+        const reqBody = {
+            inc_votes: change,
+        };
+    
+        setArticle({
+            ...article,
+            votes: article.votes + change
         })
-    }
+    
+            articlesApi
+            .patch(`/articles/${article_id}`, reqBody)
+            .catch((err) => {
+                console.error(err)
+                alert('error updating article votes')
+            })
+        }
 
     return (
         <div>
