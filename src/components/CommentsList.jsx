@@ -18,9 +18,13 @@ export const CommentsList = ({setComments, comments}) => {
         })
     }, [params.article_id])
     
-    const handleDeleteComment = (commentItem) => {
+    const handleDeleteComment = (commentIndex, comment_id) => {
+        articlesApi.delete(`/comments/${comment_id}`)
+        
         const newComments = [...comments];
-        newComments.splice(commentItem, 1);
+        
+        newComments.splice(commentIndex, 1);
+        
         setComments(newComments);
     }
 
@@ -37,7 +41,7 @@ export const CommentsList = ({setComments, comments}) => {
                     <span aria-label="votes for this comment">👍</span>
                     </button>
 
-                    <button onClick={() => handleDeleteComment(commentItem)}>delete</button>
+                    <button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button>
                 </li>
             })}
         </ul>
