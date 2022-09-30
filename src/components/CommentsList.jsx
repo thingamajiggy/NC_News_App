@@ -17,17 +17,11 @@ export const CommentsList = ({setComments, comments}) => {
             setComments(res.data.selectedComments)
         })
     }, [params.article_id])
-    
-    const handleDeleteComment = (commentItem) => {
-        const newComments = [...comments];
-        newComments.splice(commentItem, 1);
-        setComments(newComments);
-    }
 
     return (
         <section>
         <ul>
-            {comments.map((comment, commentItem) => {
+            {comments.map((comment, commentIndex) => {
                 return <li key={comment.comment_id}>
                     <p>{comment.author}</p>
                     <p>{comment.body}</p>
@@ -37,7 +31,7 @@ export const CommentsList = ({setComments, comments}) => {
                     <span aria-label="votes for this comment">👍</span>
                     </button>
 
-                    <button onClick={() => handleDeleteComment(commentItem)}>delete</button>
+                    <button>delete</button>
                 </li>
             })}
         </ul>
