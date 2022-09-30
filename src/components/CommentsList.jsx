@@ -20,18 +20,15 @@ export const CommentsList = ({setComments, comments}) => {
     
     const handleDeleteComment = (commentIndex, comment_id) => {
         articlesApi.delete(`/comments/${comment_id}`)
-        
         const newComments = [...comments];
-        
         newComments.splice(commentIndex, 1);
-        
         setComments(newComments);
     }
 
     return (
         <section>
         <ul>
-            {comments.map((comment, commentItem) => {
+            {comments.map((comment, commentIndex) => {
                 return <li key={comment.comment_id}>
                     <p>{comment.author}</p>
                     <p>{comment.body}</p>
