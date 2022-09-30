@@ -51,7 +51,7 @@ export const CommentsAdder = ({addComment}) => {
             onChange={(e) => setCommentInput(e.target.value)}>
             </textarea>
 
-        <select class="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
+        <select className="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
             {authors.map((username) => <option value={username} key={username}>{username}</option>)}
         </select>
 

@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from "../contexts/User";
+
 
 
 const articlesApi = axios.create({
@@ -10,6 +12,7 @@ const articlesApi = axios.create({
 export const CommentsList = ({setComments, comments}) => {
     
     const params = useParams();
+    const { loggedInUser } = useContext(UserContext);
 
     useEffect(() => {
         articlesApi.get(`/articles/${params.article_id}/comments`)
@@ -38,7 +41,8 @@ export const CommentsList = ({setComments, comments}) => {
                     <span aria-label="votes for this comment">👍</span>
                     </button>
 
-                    <button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button>
+
+                    {loggedInUser.username === comment.author ?<button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button> : null} 
                 </li>
             })}
         </ul>

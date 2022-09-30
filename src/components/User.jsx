@@ -7,14 +7,15 @@ const articlesApi = axios.create({
 })
 
 const User = () => {
+    const [selectedUser, setSelectedUser] = useState();
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const { setLoggedInUser } = useContext(UserContext)
+    const { setLoggedInUser } = useContext(UserContext);
 
     useEffect(() => {
         articlesApi.get("/users")
-        .then((users) => {
-            setUsers(users);
+        .then((res) => {
+            setUsers(res.data.users);
             setIsLoading(false);
         })
     }, []);
@@ -23,16 +24,21 @@ const User = () => {
         return <p>Loading</p>
     }
     return (
-        <ul>
-            {users.map((user) => {
+        <>
+        <select onChange={(ev) => {
+            const selectedUser = users.find(({ username }) => username === ev.target.value)
+            setSelectedUser(selectedUser)
+        }}>
+            {users.map((user, i) => {
                 return (
-                    <li key={user.username}>
-                        <p>{user.name}</p>
-                        <button onClick={() => setLoggedInUser(user)}></button>
-                    </li>
+                    <option value={user.username} key={user.username}>{user.name}</option>
                 );
+                
             })}
-        </ul>
+                
+        </select>
+        <button onClick={() => setLoggedInUser(selectedUser)}>welcome</button>
+        </>
     );
 };
 

@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <button onClick={() => value.setLoggedInUser(null)}>Log out</button>
+        <button onClick={() => value.setLoggedInUser({})}>Log out</button>
         <Nav />
         <main>
           <Routes>
