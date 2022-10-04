@@ -20,9 +20,10 @@ export const TopicsPage = () => {
 
     return (
         <ul>
-            {topic.map(({article_id, title, author}) => {
+            {topic.map(({article_id, title, author, body}) => {
                 return <li key={article_id} className="App-list">
-                    <Link to ={`/articles/${article_id}`}>{title} by {author}</Link>
+                    <Link to={`/articles/${article_id}`}>{title}</Link>
+                    <p>by {author}</p>
                 </li>
             })}
         </ul>

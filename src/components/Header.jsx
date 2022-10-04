@@ -1,10 +1,16 @@
-const Header = () => {
-    return (
-        <div>
-            <h1>Welcome to NC News</h1>
+import { UserContext } from "../context/User";
+import { useContext } from "react";
 
-            <p>Logged in User here</p>
-        </div>
+
+const Header = () => {
+    const { loggedInuser } = useContext(UserContext)
+    return (
+        <header>
+            <h1>Welcome to NC News</h1>
+            <section>
+                <p>{loggedInuser}</p>
+            </section>
+        </header>
     )
 }
 

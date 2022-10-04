@@ -25,9 +25,10 @@ export const AuthorsPage = () => {
                 Welcome to the author {username}'s page
             </h2>
             <ul>
-            {author.map(({title, article_id}) => {
-                return <li key={article_id} className="App-list">
-                    <Link to={`/articles/${article_id}`}>{title}</Link>
+            {author.map(({author, title, body}) => {
+                return <li key={author} className="App-list">
+                    <Link to={`/articles/${author}`}>{title}</Link>
+                    <p>{body}</p>
                 </li>
             })}
             </ul>

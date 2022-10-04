@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from "../context/User";
 
 
 const articlesApi = axios.create({
@@ -8,10 +9,9 @@ const articlesApi = axios.create({
 })
 
 export const CommentsList = ({setComments, comments}) => {
-
-    console.log(comments, ">>what is this")
     
     const params = useParams();
+    const { loggedInUser } = useContext(UserContext)
 
     useEffect(() => {
         articlesApi.get(`/articles/${params.article_id}/comments`)
@@ -20,17 +20,17 @@ export const CommentsList = ({setComments, comments}) => {
         })
     }, [params.article_id])
     
-    const handleDeleteComment = (commentItem) => {
-        // articlesApi.delete(`/comments/${params.comment_id}`)
+    const handleDeleteComment = (commentIndex, comment_id) => {
+        articlesApi.delete(`/comments/${comment_id}`)
         const newComments = [...comments];
-        newComments.splice(commentItem, 1);
+        newComments.splice(commentIndex, 1);
         setComments(newComments);
     }
  
     return (
         <section>
         <ul>
-            {comments.map((comment, commentItem) => {
+            {comments.map((comment, commentIndex) => {
                 return <li key={comment.comment_id}>
                     <p>{comment.author}</p>
                     <p>{comment.body}</p>
@@ -40,7 +40,8 @@ export const CommentsList = ({setComments, comments}) => {
                     <span aria-label="votes for this comment">👍</span>
                     </button>
 
-                    <button onClick={() => handleDeleteComment(commentItem)}>delete</button>
+                    {loggedInUser.username === comment.author ? <button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button> : null}
+                    
                 </li>
             })}
         </ul>

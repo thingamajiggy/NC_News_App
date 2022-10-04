@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const articlesApi = axios.create({
@@ -12,7 +12,7 @@ export const ArticlesList = ({ articlesLists, setArticlesLists }) => {
         .then((res) => {
             return setArticlesLists(res.data.result);
         })
-    }, [])
+    }, [setArticlesLists])
 
     return (
         <ul>
