@@ -3,35 +3,47 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
-
 export const AuthorsPage = () => {
     const [author, setAuthor] = useState([]);
-    const {username} = useParams();
+    const params = useParams();
 
     useEffect(() => {
-        articlesApi.get(`/articles?author=${username}`)
+        axios.get(`/articles?author=${params.username}`)
         .then((res) => {
             setAuthor(res.data.result)
         })
-    }, [username])
+    }, [params.username])
    
     return (
         <>
-            <h2>
-                Welcome to the author {username}'s page
+            <h2 className="mt-3">
+                Welcome to the author {params.username}'s page
             </h2>
-            <ul>
-            {author.map(({author, title, body}) => {
-                return <li key={author} className="App-list">
-                    <Link to={`/articles/${author}`}>{title}</Link>
-                    <p>{body}</p>
-                </li>
-            })}
-            </ul>
+            <div className="container">
+                <div className="row">
+
+                {author.map(({author, title, body, topic}) => {
+                    return (
+                        <div className="col-xs-12 col-sm-6">
+                            <div key={title} className="card">
+                                <div className="card-body">
+                                    <div className="card-title">
+                                        <Link to={`/articles/${author}`}>{title}</Link>
+                                    </div>
+                                    <div className="card-text">
+                                        {body.slice(0, 100)}...
+                                    </div>
+                                    <Link className="card-link text-capitalize" to={`/topics/${topic}`}>
+                                        {topic}
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    ) 
+                })}
+                </div>
+            </div>
+            
         </>
     )
 }

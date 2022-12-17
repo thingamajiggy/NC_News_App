@@ -4,20 +4,16 @@ import axios from 'axios';
 import CommentsList from "./CommentsList";
 import CommentsAdder from "./CommentsAdder";
 
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
-
-export const ArticlesPage = () => {
-    const [article, setArticle] = useState([]);
+export const ArticlesPage = ({articleList}) => {
+    const [article, setArticle] = useState({});
     const [comments, setComments] = useState([]);
     const [isVoting, setIsVoting] = useState(false);
     const params = useParams();
 
     useEffect(() => {
-        articlesApi.get(`/articles/${params.article_id}`)
+        axios.get(`/articles/${params.article_id}`)
         .then((res) => {
-            return setArticle(res.data)
+            return setArticle(res.data.article)
         })
     }, [params.article_id])
     
@@ -32,8 +28,7 @@ export const ArticlesPage = () => {
             ...article,
             votes: article.votes + change
         })
-    
-            articlesApi
+            axios
             .patch(`/articles/${article_id}`, reqBody)
             .catch((err) => {
                 console.error(err)
@@ -47,7 +42,6 @@ export const ArticlesPage = () => {
         <h3>{article.title}</h3>
         <p>by {article.author}</p>
         <p>{article.body}</p>
-
         {article.votes}
         <button type="button" onClick={() => {
             voteOnArticle(params.article_id, 1);
@@ -60,10 +54,6 @@ export const ArticlesPage = () => {
         <span aria-label="decrease votes for this article">👎</span>
         </button>
 
-        <section>
-            <p>comments</p>
-        <CommentsList comments={comments} setComments={setComments} />
-        </section>
 
         <section>
         <CommentsAdder addComment={(newComment) => {
@@ -73,7 +63,12 @@ export const ArticlesPage = () => {
                 ])
         }} />
         </section>
-        
+
+        <section>
+            <p>comments</p>
+        <CommentsList comments={comments} setComments={setComments} />
+        </section>
+
         <Link to={`/articles/${Number(params.article_id) + 1}`}>Next News</Link>
         </div>
     )   

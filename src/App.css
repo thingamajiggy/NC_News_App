@@ -1,7 +1,59 @@
-body {
-  margin: 0;
-  font-family: 'Zilla Slab', serif;
-  background-color: #f4f5df;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+.header-design {
+  margin-top: 30px;
+}
+
+.App-news-item {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ecf0f1;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0px 20px;
+  transition: all 0.3s ease 0s;
+}
+
+.header-design {
+  font-family: "Montserrat", sans-serif;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+/* a {
+  text-decoration: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.grid-item {
+  border: 1px solid black;
+}
+
+.App-news-item:link {
+  text-decoration: none;
+}
+
+.Navbar-decoration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10%;
+}
+
+.Menu {
+  list-style: none;
+}
+
+.App-news-list:hover {
+  color: #0088a9;
 }
 
 .App {
@@ -9,9 +61,9 @@ body {
     color: black;
     font-weight: 600;
     font-size: 1.1rem;
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -30,16 +82,7 @@ body {
   list-style: none;
 }
 
-.App-news-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  list-style-type: none;
-  padding: 0;
-}
-
-.App-news-item {
-  margin: 1em;
-  padding: 1em;
-  border-radius: 5px;
-}
+.Navbar-decoration {
+  height: 100vh;
+  width: 100%;
+} */

@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Home from './components/Home';
 import Nav from './components/Nav';
@@ -13,6 +14,9 @@ import TopicsPage from './components/TopicsPage';
 import User from './components/User';
 import { UserContext, UserProvider } from './context/User';
 import LogInPage from './components/LogInPage';
+import axios from 'axios';
+
+axios.defaults.baseURL = "http://localhost:9090/api";
 
 function App() {
   const [articlesLists, setArticlesLists] = useState([]);

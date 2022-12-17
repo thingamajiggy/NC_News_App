@@ -3,10 +3,6 @@ import { UserContext } from "../context/User";
 import { useContext, useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
-
 const User = () => {
     const [selectedUser, setSelectedUser] = useState();
     const [users, setUsers] = useState([]);
@@ -15,7 +11,7 @@ const User = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        articlesApi.get("/users")
+        axios.get("/users")
         .then((res) => {
             setUsers(res.data.users);
             setIsLoading(false);

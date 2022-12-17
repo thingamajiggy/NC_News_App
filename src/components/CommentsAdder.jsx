@@ -2,10 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
-
 const authors = [
     "tickle122", "grumpy19", "happyamy2016", "cooljmessy", "weegembump", "jessjelly"
 ]
@@ -21,7 +17,7 @@ export const CommentsAdder = ({addComment}) => {
 
     setIsSubmitting(true)
 
-    articlesApi.post(`/articles/${params.article_id}/comments`, {
+    axios.post(`/articles/${params.article_id}/comments`, {
         body: commentInput,
         username: addUsername
     })
@@ -42,7 +38,15 @@ export const CommentsAdder = ({addComment}) => {
    }
 
     return(
-        <section>
+        <div className="input-group">
+
+        <select className="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
+            {authors.map((username) => <option value={username} key={username}>{username}</option>)}
+        </select>
+
+            <button disabled={isSubmitting || !commentInput || !addUsername}>Add</button>
+
+
 
         <form onSubmit={(e) => {handleSubmit(e)}}>
             <label htmlFor="commentInput">Add a comment</label>
@@ -52,14 +56,8 @@ export const CommentsAdder = ({addComment}) => {
             onChange={(e) => setCommentInput(e.target.value)}>
             </textarea>
 
-        <select className="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
-            {authors.map((username) => <option value={username} key={username}>{username}</option>)}
-        </select>
-
-            <button disabled={isSubmitting || !commentInput || !addUsername}>Add</button>
-
-        </form>
-        </section>
+                </form>
+        </div>
     )
 }
 export default CommentsAdder;

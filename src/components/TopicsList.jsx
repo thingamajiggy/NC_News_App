@@ -2,14 +2,10 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
-
 export const TopicsList = () => {
     const [topicLists, setTopicLists] = useState([]);
     useEffect(() => {
-        articlesApi.get("/topics")
+        axios.get("/topics")
         .then((res) => {
             return setTopicLists(res.data.topics)
         })

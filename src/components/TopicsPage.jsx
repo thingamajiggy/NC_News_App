@@ -3,30 +3,44 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
-
 export const TopicsPage = () => {
     const [topic, setTopic] = useState([]);
     const {slug} = useParams();
 
     useEffect(() => {
-        articlesApi.get(`/articles?topic=${slug}`)
+        axios.get(`/articles?topic=${slug}`)
         .then((res) => {
             return setTopic(res.data.result)
         })
     }, [slug])
 
     return (
-        <ul>
+        <>
+        <h2 className="mt-3">
+            {slug}
+        </h2>
+        <div className="container">
+        <div className="row">
             {topic.map(({article_id, title, author, body}) => {
-                return <li key={article_id} className="App-list">
+                return (
+                <div className="col-xs-12 col-sm-6">
+                <div key={article_id} className="card">
+                    <div className="card-body">
+                    <div className="card-title">
                     <Link to={`/articles/${article_id}`}>{title}</Link>
                     <p>by {author}</p>
-                </li>
+                    </div>
+                    <div className="card-text">
+                        {body.slice(0, 100)}...
+                    </div>
+                    </div>
+                </div>
+                </div>
+                )
             })}
-        </ul>
+        </div>
+        </div>
+        </>
     )
     
 }

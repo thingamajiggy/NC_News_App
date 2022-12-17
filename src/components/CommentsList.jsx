@@ -1,12 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { UserContext } from "../context/User";
-
-
-const articlesApi = axios.create({
-    baseURL: "https://myfirstbackendproject.herokuapp.com/api"
-})
+import axios from 'axios'
 
 export const CommentsList = ({setComments, comments}) => {
     
@@ -14,14 +9,14 @@ export const CommentsList = ({setComments, comments}) => {
     const { loggedInUser } = useContext(UserContext)
 
     useEffect(() => {
-        articlesApi.get(`/articles/${params.article_id}/comments`)
+        axios.get(`/articles/${params.article_id}/comments`)
         .then((res) => {
             setComments(res.data.selectedComments)
         })
     }, [params.article_id])
     
     const handleDeleteComment = (commentIndex, comment_id) => {
-        articlesApi.delete(`/comments/${comment_id}`)
+        axios.delete(`/comments/${comment_id}`)
         const newComments = [...comments];
         newComments.splice(commentIndex, 1);
         setComments(newComments);
@@ -40,7 +35,7 @@ export const CommentsList = ({setComments, comments}) => {
                     <span aria-label="votes for this comment">👍</span>
                     </button>
 
-                    {loggedInUser.username === comment.author ? <button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button> : null}
+                    {loggedInUser?.username === comment.author ? <button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button> : null}
                     
                 </li>
             })}

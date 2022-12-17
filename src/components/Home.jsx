@@ -1,5 +1,5 @@
 export const Home = () => {
-    const [searchParams] = useSearchParams();
+    // const [searchParams] = useSearchParams();
 
     return (
         <div>
