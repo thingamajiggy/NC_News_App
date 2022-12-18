@@ -16,7 +16,7 @@ export const ArticlesList = ({ articlesLists, setArticlesLists }) => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-xs-10 col-sm-8 col-lg-5">
+                <div className="col-xs-12 col-sm-12 col-lg-9">
                     <div className='container my-5'>
                     <div className='row'>
                         <div className='col-xs-12'>

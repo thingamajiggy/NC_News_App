@@ -24,11 +24,13 @@ export const CommentsList = ({setComments, comments}) => {
  
     return (
         <section>
-        <ul>
-            {comments.map((comment, commentIndex) => {
-                return <li key={comment.comment_id}>
-                    <p>{comment.author}</p>
-                    <p>{comment.body}</p>
+        <div className="comment pb-4 border-b border-gray-200">
+            <div className="flex">       
+                <div className="w-11/12">     
+                {comments.map((comment, commentIndex) => {
+                return <div key={comment.comment_id}>
+                    <div className="mb-1 font-weight-bold">{comment.author}</div>
+                    <div className="">{comment.body}</div>
 
                     <button type="button">
                     {comment.votes}
@@ -37,9 +39,11 @@ export const CommentsList = ({setComments, comments}) => {
 
                     {loggedInUser?.username === comment.author ? <button onClick={() => handleDeleteComment(commentIndex, comment.comment_id)}>delete</button> : null}
                     
-                </li>
+                </div>
             })}
-        </ul>
+                </div>
+            </div>
+        </div>
         </section>
     )
 }

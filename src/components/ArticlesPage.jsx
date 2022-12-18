@@ -37,10 +37,19 @@ export const ArticlesPage = ({articleList}) => {
         }
 
     return (
-        <div>
+        <div className="container">
+            <div className="row">
+            <div className="col-xs-12 col-sm-6">
+                <div className="card">
+                <div className="card-body">
         <p>Topic: {article.topic}</p>
+        <div className="card-title">
         <h3>{article.title}</h3>
-        <p>by {article.author}</p>
+        </div>
+        <div>
+        <p>by {article.author} | published {article.created_at}</p>
+        </div>
+        <div className="card-text">
         <p>{article.body}</p>
         {article.votes}
         <button type="button" onClick={() => {
@@ -53,7 +62,7 @@ export const ArticlesPage = ({articleList}) => {
         }} disabled={isVoting}>
         <span aria-label="decrease votes for this article">👎</span>
         </button>
-
+        </div>
 
         <section>
         <CommentsAdder addComment={(newComment) => {
@@ -70,6 +79,10 @@ export const ArticlesPage = ({articleList}) => {
         </section>
 
         <Link to={`/articles/${Number(params.article_id) + 1}`}>Next News</Link>
+        </div>
+        </div>
+        </div>
+        </div>
         </div>
     )   
 }

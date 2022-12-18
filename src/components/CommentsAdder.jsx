@@ -38,26 +38,38 @@ export const CommentsAdder = ({addComment}) => {
    }
 
     return(
-        <div className="input-group">
-
-        <select className="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
-            {authors.map((username) => <option value={username} key={username}>{username}</option>)}
-        </select>
-
-            <button disabled={isSubmitting || !commentInput || !addUsername}>Add</button>
-
-
-
         <form onSubmit={(e) => {handleSubmit(e)}}>
-            <label htmlFor="commentInput">Add a comment</label>
-            <textarea 
-            id="commentInput" 
-            value={commentInput} 
-            onChange={(e) => setCommentInput(e.target.value)}>
-            </textarea>
 
-                </form>
+        <div className="form-group">
+            <select className="form-control" onChange={(e) => {handleAddUsernameChange(e)}}>
+                <option>choose one</option>
+                {authors.map((username) => <option value={username} key={username}>{username}</option>)}
+            </select>
         </div>
+
+        <div className="form-group">
+            {/* <label htmlFor="commentInput">Add a comment</label> */}
+            <textarea
+            className="form-control"
+            id="commentInput"
+            placeholder="Your Comment"
+            value={commentInput} 
+            onChange={(e) => setCommentInput(e.target.value)}
+            rows="3"
+            >
+            </textarea>
+        </div>
+
+        <div>
+            <button 
+            type="button" className="btn button comments__button text-3 border-none p-2 text-white uppercase mt-1 bg-black float-right uppercase
+            "
+            disabled={isSubmitting || !commentInput || !addUsername}>
+                Add
+            </button>
+        </div>
+
+        </form>
     )
 }
 export default CommentsAdder;

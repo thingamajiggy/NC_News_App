@@ -23,26 +23,42 @@ const User = () => {
     }
 
     return (
-        <>
-        <select onChange={(event) => {
-            const selectedUser = users.find(({ username }) => {
-                return username === event.target.value;
-            })
-            setSelectedUser(selectedUser)
-        }}>
-            {users.map((user, i) => {
-                return (
-                    <option value={user.username} key={user.username}>
-                        {user.name}
-                    </option>
-                )
-            })}
-        </select>
-        <button onClick={() => {
-        setLoggedInUser(selectedUser)
-        navigate("/loggedin")
-        }}>Sign in</button>
-        </>
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-xs-12 col-sm-4">
+                    <div className="card mt-5">
+                        <h1 className="card-header h3">
+                            Login
+                        </h1>
+                        <div className="card-body">
+                            <div className="form-group">
+                                <select className="form-select" onChange={(event) => {
+                                    const selectedUser = users.find(({ username }) => {
+                                        return username === event.target.value;
+                                    })
+                                    setSelectedUser(selectedUser)
+                                }}>
+                                    <option value=""></option>
+                                    {users.map((user, i) => {
+                                        return (
+                                            <option value={user.username} key={user.username}>
+                                                {user.name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            <button disabled={!selectedUser} className="btn btn-primary mt-3" onClick={() => {
+                                setLoggedInUser(selectedUser)
+                                navigate("/loggedin")
+                            }}>
+                                Sign in
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

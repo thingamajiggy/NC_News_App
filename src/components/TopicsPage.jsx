@@ -15,32 +15,36 @@ export const TopicsPage = () => {
     }, [slug])
 
     return (
-        <>
-        <h2 className="mt-3">
-            {slug}
-        </h2>
         <div className="container">
-        <div className="row">
-            {topic.map(({article_id, title, author, body}) => {
-                return (
-                <div className="col-xs-12 col-sm-6">
-                <div key={article_id} className="card">
-                    <div className="card-body">
-                    <div className="card-title">
-                    <Link to={`/articles/${article_id}`}>{title}</Link>
-                    <p>by {author}</p>
-                    </div>
-                    <div className="card-text">
-                        {body.slice(0, 100)}...
+            <div className="row">
+                <div className="col-xs-12">
+                    <h2 className="my-3 text-capitalize">
+                        {slug}
+                    </h2>
+                    <div className="container">
+                    <div className="row">
+                        {topic.map(({article_id, title, author, body}) => {
+                            return (
+                            <div className="col-xs-12 col-sm-6">
+                            <div key={article_id} className="card">
+                                <div className="card-body">
+                                <div className="card-title">
+                                <Link to={`/articles/${article_id}`}>{title}</Link>
+                                <p>by {author}</p>
+                                </div>
+                                <div className="card-text">
+                                    {body.slice(0, 100)}...
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            )
+                        })}
                     </div>
                     </div>
                 </div>
-                </div>
-                )
-            })}
+            </div>
         </div>
-        </div>
-        </>
     )
     
 }

@@ -7,6 +7,8 @@ export const AuthorsPage = () => {
     const [author, setAuthor] = useState([]);
     const params = useParams();
 
+    console.log(author, ">>>>")
+
     useEffect(() => {
         axios.get(`/articles?author=${params.username}`)
         .then((res) => {
@@ -15,36 +17,40 @@ export const AuthorsPage = () => {
     }, [params.username])
    
     return (
-        <>
-            <h2 className="mt-3">
-                Welcome to the author {params.username}'s page
-            </h2>
-            <div className="container">
-                <div className="row">
+        <div className="container">
+            <div className="row">
+                <div className="col-xs-12">
+                    <h2 className="my-3">
+                        Welcome to the author {params.username}'s page
+                    </h2>
+                    <div className="container">
+                        <div className="row">
 
-                {author.map(({author, title, body, topic}) => {
-                    return (
-                        <div className="col-xs-12 col-sm-6">
-                            <div key={title} className="card">
-                                <div className="card-body">
-                                    <div className="card-title">
-                                        <Link to={`/articles/${author}`}>{title}</Link>
+                        {author.map(({author, title, body, topic}) => {
+                            return (
+                                <div className="col-xs-12 col-sm-6">
+                                    <div key={title} className="card">
+                                        <div className="card-body">
+                                            <div className="card-title">
+                                                <Link to={`/articles/${author}`}>{title}</Link>
+                                            </div>
+                                            <div className="card-text">
+                                                {body.slice(0, 100)}...
+                                            </div>
+                                            <Link className="card-link text-capitalize" to={`/topics/${topic}`}>
+                                                {topic}
+                                            </Link>
+                                        </div>
                                     </div>
-                                    <div className="card-text">
-                                        {body.slice(0, 100)}...
-                                    </div>
-                                    <Link className="card-link text-capitalize" to={`/topics/${topic}`}>
-                                        {topic}
-                                    </Link>
                                 </div>
-                            </div>
+                            ) 
+                        })}
                         </div>
-                    ) 
-                })}
+                    </div>
+                    
                 </div>
             </div>
-            
-        </>
+        </div>
     )
 }
 
