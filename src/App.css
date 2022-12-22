@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
 .header-design {
   margin-top: 30px;
 }
@@ -21,6 +25,25 @@
 
 .mr-auto {
   margin-right: auto;
+}
+
+.form-design {
+  margin-top: 10px;
+}
+
+.border-line {
+  border-top: 1px solid gray;
+  margin-top: 30px;
+}
+
+.border-line-2 {
+  border-top: 1px solid gray;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.comment-line {
+  margin-top: 10px;
 }
 
 /* a {

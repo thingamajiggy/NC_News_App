@@ -12,9 +12,9 @@ export const AuthorsList = (() => {
         })
     }, [])
     return (
-        <ul>
+        <ul aria-labelledby="author-dropdown" className="dropdown-menu">
             {authorLists.map((authorList) => {
-                return <li key={authorList.username} className="App-list">
+                return <li key={authorList.username} className="dropdown-item">
                     <Link to={`/users/${authorList.username}`}>{authorList.name}</Link>
                 </li>
             })}

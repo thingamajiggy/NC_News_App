@@ -15,6 +15,7 @@ import User from './components/User';
 import { UserContext, UserProvider } from './context/User';
 import LogInPage from './components/LogInPage';
 import axios from 'axios';
+import SearchResultsPage from './components/SearchResultsPage'
 
 axios.defaults.baseURL = "http://localhost:9090/api";
 
@@ -38,6 +39,7 @@ function App() {
               <Route path="/users/:username" element={<AuthorsPage />} />
               <Route path="/topics" element={<TopicsList />} />
               <Route path="/topics/:slug" element={<TopicsPage />} />
+              <Route path="/search-articles/:searchTerm" element={<SearchResultsPage />} />
             </Routes>
           </main>
         </div>

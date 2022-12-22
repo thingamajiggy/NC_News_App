@@ -40,9 +40,9 @@ export const CommentsAdder = ({addComment}) => {
     return(
         <form onSubmit={(e) => {handleSubmit(e)}}>
 
-        <div className="form-group">
-            <select className="form-control" onChange={(e) => {handleAddUsernameChange(e)}}>
-                <option>choose one</option>
+        <div className="form-group mb-3">
+            <select className="form-select" onChange={(e) => {handleAddUsernameChange(e)}}>
+                <option value="">Choose one</option>
                 {authors.map((username) => <option value={username} key={username}>{username}</option>)}
             </select>
         </div>

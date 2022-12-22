@@ -11,10 +11,10 @@ export const TopicsList = () => {
         })
     }, [])
     return (
-        <ul>
+        <ul aria-labelledby='topics-dropdown' className='dropdown-menu'>
             {topicLists.map(({slug}) => {
-                return <li key={slug} className="App-list">
-                    <Link to={`/topics/${slug}`}>{slug}</Link>
+                return <li key={slug} className="dropdown-item">
+                    <Link className="text-capitalize" to={`/topics/${slug}`}>{slug}</Link>
                 </li>
             })}
         </ul>
