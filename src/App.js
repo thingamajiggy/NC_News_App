@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Nav from './components/Nav';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import ArticlesList from './components/ArticlesList';
 import ArticlesPage from './components/ArticlesPage';
 import AuthorsList from './components/AuthorsList';
@@ -12,12 +12,12 @@ import AuthorsPage from './components/AuthorsPage';
 import TopicsList from './components/TopicsList';
 import TopicsPage from './components/TopicsPage';
 import User from './components/User';
-import { UserContext, UserProvider } from './context/User';
+import { UserProvider } from './context/User';
 import LogInPage from './components/LogInPage';
 import axios from 'axios';
 import SearchResultsPage from './components/SearchResultsPage'
 
-axios.defaults.baseURL = "http://localhost:9090/api";
+axios.defaults.baseURL = "https://nc-news-app.herokuapp.com/api/";
 
 function App() {
   const [articlesLists, setArticlesLists] = useState([]);
