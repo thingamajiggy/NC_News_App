@@ -28,27 +28,25 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item dropdown">
-              <a
+              <div
                 className="nav-link dropdown-toggle"
                 id="author-dropdown"
-                href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Author
-              </a>
+              </div>
               <AuthorsList />
             </li>
             <li className="nav-item dropdown">
-              <a
+              <div
                 className="nav-link dropdown-toggle"
                 id="topics-dropdown"
-                href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Topic
-              </a>
+              </div>
               <TopicsList />
             </li>
             {!loggedInUser ? (

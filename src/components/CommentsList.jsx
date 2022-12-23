@@ -11,7 +11,7 @@ export const CommentsList = ({ setComments, comments }) => {
     axios.get(`/articles/${params.article_id}/comments`).then((res) => {
       setComments(res.data.selectedComments);
     });
-  }, [params.article_id]);
+  }, [setComments, params.article_id]);
 
   const handleDeleteComment = (commentIndex, comment_id) => {
     axios.delete(`/comments/${comment_id}`);
